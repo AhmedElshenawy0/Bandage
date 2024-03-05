@@ -23,7 +23,7 @@ export type StateType = {
 export type CartListType = {
   cartList: ProductType[]
   isToken: any
-  token: string
+  token: any
   id: any
   user:any
 }

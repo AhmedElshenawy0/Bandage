@@ -79,7 +79,7 @@ export const useCartStore = defineStore('cart', {
 
     logout() {
       sessionStorage.removeItem('token')
-      this.token = false
+      this.token = ""
     },
     DeleteAccount() {
       sessionStorage.removeItem('id')
