@@ -12,6 +12,6 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  // base: '/Bandage/',
-  mode: 'hash'
+  base: process.env.NODE_ENV === "production" ? "/Bandage/" : "/",
+  // mode: 'hash',
 })
