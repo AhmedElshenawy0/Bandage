@@ -13,5 +13,5 @@ export default defineConfig({
     }
   },
   // base: '/Bandage/',
-  // mode: 'hash'
+  mode: 'hash'
 })
