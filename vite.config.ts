@@ -13,5 +13,4 @@ export default defineConfig({
     }
   },
   base: process.env.NODE_ENV === "production" ? "/Bandage/" : "/",
-  // mode: 'hash',
 })

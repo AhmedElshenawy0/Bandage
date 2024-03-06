@@ -15,7 +15,7 @@
             <label>Password</label>
             <input type="password" v-model="formData.password" required/>
           </div>
-          <button type="submit" class="btn">Login</button>
+          <button type="submit" class="btn">Register</button>
         </form>
       </div>
     </div>
@@ -40,7 +40,9 @@ const register = cartStore.register
 const handleSubmit = () => {
   formData.username !== '' && formData.password !== '' && register(formData)
   toast.success("You has been registered successfuly, please log in")
-  router.push('/login')
+  setTimeout(() => {
+    router.push('/login')
+  }, 3000);
 }
 </script>
 

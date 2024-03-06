@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 
 const cartStore = useCartStore()
 
-const { cartList, isToken } = storeToRefs(cartStore)
+const { cartList, token } = storeToRefs(cartStore)
 import { computed, ref } from 'vue'
 
 const total = computed((): number => {
@@ -21,17 +21,17 @@ const shipping = ref<number>(20)
       class="text-secondary fw-semibold d-flex justify-content-between align-items-center border-bottom mb-1"
     >
       <p>Subtotal</p>
-      <p>${{ isToken ? total.toFixed(2) : 0 }}</p>
+      <p>${{ token ? total.toFixed(2) : 0 }}</p>
     </div>
     <div
       class="text-secondary fw-semibold d-flex justify-content-between align-items-center border-bottom mb-1"
     >
       <p>Shipping</p>
-      <p>${{ isToken ? shipping.toFixed(2) : 0 }}</p>
+      <p>${{ token ? shipping.toFixed(2) : 0 }}</p>
     </div>
     <div class="fw-semibold d-flex justify-content-between align-items-center">
       <p>Total amount</p>
-      <p>${{ isToken ? (total + shipping).toFixed(2) : 0 }}</p>
+      <p>${{ token ? (total + shipping).toFixed(2) : 0 }}</p>
     </div>
     <button
       class="check btn btn-primary border-0 rounded-1 text-white w-100 fw-semibold position-relative d-flex justify-content-center"

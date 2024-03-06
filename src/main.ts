@@ -9,7 +9,7 @@ import router from './router'
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // import { fas } from '@fortawesome/free-solid-svg-icons'
 import 'vue3-toastify/dist/index.css'
-
+import 'sweetalert2/src/sweetalert2.scss'
 // library.add(fas)
 const app = createApp(App)
 

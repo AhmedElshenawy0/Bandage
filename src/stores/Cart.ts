@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { type CartListType, type ProductType, type FormType } from '@/Types/productsType'
 import { toast } from 'vue3-toastify'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export const useCartStore = defineStore('cart', {
   state: (): CartListType => ({
@@ -50,7 +51,13 @@ export const useCartStore = defineStore('cart', {
     deleteFromCart(id: number) {
       if (sessionStorage.getItem('token')) {
         this.cartList = this.cartList.filter((ele) => ele.id != id)
-        toast.error('The item has been deleted successfully')
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your item has been deleted',
+          showConfirmButton: false,
+          timer: 1000
+        })
         sessionStorage.setItem('cartList', JSON.stringify(this.cartList))
       } else {
         toast.warning('You have to login first')
@@ -79,13 +86,8 @@ export const useCartStore = defineStore('cart', {
 
     logout() {
       sessionStorage.removeItem('token')
-      this.token = ""
+      this.token = ''
     },
-    DeleteAccount() {
-      sessionStorage.removeItem('id')
-      sessionStorage.removeItem('cartList')
-
-      this.cartList = []
-    }
+    DeleteAccount() {}
   }
 })

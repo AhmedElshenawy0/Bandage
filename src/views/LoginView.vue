@@ -6,6 +6,7 @@
       </div>
       <div class="d-flex justify-content-center align-items-center form">
         <form class="container p-3 d-flex flex-column gap-4" @submit.prevent="handleSubmit">
+          <h3 class="text-center">Log in</h3>
           <div class="d-flex flex-column">
             <label>User name</label>
             <input type="text" required />
@@ -31,7 +32,7 @@ window.scrollTo(0, 0)
 
 const router = useRouter()
 const cartStore = useCartStore()
-const { token, id } = storeToRefs(cartStore)
+const { token } = storeToRefs(cartStore)
 
 const formData = {
   username: 'mor_2314',

@@ -3,9 +3,10 @@ import { useCartStore } from '@/stores/Cart'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
+import Swal from 'sweetalert2'
 const cartStore = useCartStore()
 
-const { cartList, token, id, isToken } = storeToRefs(cartStore)
+const { cartList, token, id } = storeToRefs(cartStore)
 let userId = ref(id.value)
 const increase = cartStore.increase
 const decrease = cartStore.decrease
@@ -13,11 +14,27 @@ const deleteFromCart = cartStore.deleteFromCart
 const router = useRouter()
 
 const handleDeleteAccount = () => {
-  sessionStorage.removeItem('cartList')
-  sessionStorage.removeItem('id')
-  userId.value = null
-  cartList.value = []
-  console.log(userId.value)
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You want to delete your account!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      sessionStorage.removeItem('cartList')
+      sessionStorage.removeItem('id')
+      userId.value = null
+      cartList.value = []
+      Swal.fire({
+        title: 'Deleted!',
+        text: 'Your account has been deleted.',
+        icon: 'success'
+      })
+    } 
+  })
 }
 </script>
 
@@ -26,16 +43,19 @@ const handleDeleteAccount = () => {
     <div v-if="!userId">
       <h5 class="mt-3">
         You must register and log in first .
-        <span class="login" v-if="!userId && !token" @click="$router.push('/register')">Register</span>
+        <span class="login" v-if="!userId && !token" @click="$router.push('/register')"
+          >Register</span
+        >
       </h5>
     </div>
     <div v-if="!token && userId">
       <h5 class="mt-3">
         You must log in first to show your cart.
         <span class="login" v-if="userId && !token" @click="$router.push('/login')">Login</span>
+        <br />
         <button
           @click="handleDeleteAccount"
-          class="py-1 px-3 fs-6 fw-semibold text-white bg-danger rounded mt-3 border-0"
+          class="py-2 px-3 fs-6 fw-semibold text-white bg-danger rounded mt-3 border-0"
         >
           Delete Account
         </button>
