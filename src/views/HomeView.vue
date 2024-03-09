@@ -4,6 +4,9 @@ import ProductSection from '@/components/Home/product-S/ProductSection.vue'
 import AboutSection from '@/components/Home/about-S/AboutSection.vue'
 import ServicesSection from '@/components/Home/services-S/ServicesSection.vue'
 import ClientsSection from '@/components/Home/clients-S/ClientsSection.vue'
+
+window.scrollTo(0, 0)
+
 </script>
 
 <template>

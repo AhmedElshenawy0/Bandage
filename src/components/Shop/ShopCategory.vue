@@ -17,6 +17,8 @@ onMounted(() => {
   jeweleryProduct()
 })
 console.log(menProducts.value.length)
+window.scrollTo(0, 0)
+
 </script>
 
 <template>
