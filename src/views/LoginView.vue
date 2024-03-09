@@ -13,7 +13,7 @@
           </div>
           <div class="d-flex flex-column">
             <label>Password</label>
-            <input type="text" required />
+            <input type="password" required />
           </div>
           <button type="submit" class="btn">Login</button>
         </form>
