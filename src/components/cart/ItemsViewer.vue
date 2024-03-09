@@ -10,7 +10,7 @@ let userId = ref(id.value)
 const increase = cartStore.increase
 const decrease = cartStore.decrease
 const deleteFromCart = cartStore.deleteFromCart
-
+const DeleteAccount = cartStore.DeleteAccount
 const handleDeleteAccount = () => {
   Swal.fire({
     title: 'Are you sure?',
@@ -22,10 +22,8 @@ const handleDeleteAccount = () => {
     confirmButtonText: 'Yes, delete it!'
   }).then((result) => {
     if (result.isConfirmed) {
-      sessionStorage.removeItem('cartList')
-      sessionStorage.removeItem('id')
-      userId.value = null
-      cartList.value = []
+      DeleteAccount()
+
       Swal.fire({
         title: 'Deleted!',
         text: 'Your account has been deleted.',
@@ -38,21 +36,21 @@ const handleDeleteAccount = () => {
 
 <template>
   <div>
-    <div v-if="!userId">
+    <div v-if="!id">
       <h5 class="mt-3">You must register and log in first .</h5>
       <button
         class="login btn b-0 mt-2"
-        v-if="!userId && !token"
+        v-if="!id && !token"
         @click="$router.push('/register')"
       >
         Register
       </button>
     </div>
-    <div v-if="!token && userId">
+    <div v-if="!token && id">
       <h5 class="mt-3">You must log in first to show your cart.</h5>
       <button
         class="login btn mt-2"
-        v-if="userId && !token"
+        v-if="id && !token"
         @click="$router.push('/login')"
       >
         Login

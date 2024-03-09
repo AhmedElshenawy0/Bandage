@@ -41,6 +41,7 @@ export const useCartStore = defineStore('cart', {
         toast.success('The item has been added successfully')
       } else {
         toast.warning('You have to login first')
+        router.push("/login")
       }
     },
     increase(product: ProductType) {
@@ -80,12 +81,6 @@ export const useCartStore = defineStore('cart', {
     },
 
     async register(formData: FormType) {
-      // if (this.id) {
-        // toast.warning('You have already registered, please log in')
-        // setTimeout(() => {
-        //   router.push('/login')
-        // }, 3000)
-      // } else {
         await axios
           .post('https://fakestoreapi.com/users', formData)
           .then((res) => (this.id = res.data.id))
@@ -111,6 +106,11 @@ export const useCartStore = defineStore('cart', {
       sessionStorage.removeItem('token')
       this.token = ''
     },
-    DeleteAccount() {}
+    DeleteAccount() {
+      sessionStorage.removeItem('cartList')
+      sessionStorage.removeItem('id')
+      this.id = null
+      this.cartList = []
+    }
   }
 })

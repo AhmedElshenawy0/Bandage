@@ -24,23 +24,31 @@
 
 <script setup lang="ts">
 import { useCartStore } from '@/stores/Cart'
+import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import { toast } from 'vue3-toastify'
 
 window.scrollTo(0, 0)
 
 const router = useRouter()
 const cartStore = useCartStore()
-
+const { id } = storeToRefs(cartStore)
 const formData = {
   username: '',
   password: ''
 }
 const register = cartStore.register
 const handleSubmit = () => {
-  formData.username !== '' && formData.password !== '' && register(formData)
-  setTimeout(() => {
-    router.push('/login')
-  }, 3000)
+  if (!id.value) {
+    register(formData)
+    setTimeout(() => {
+      router.push('/login')
+    }, 3000)
+  } else {
+    toast.warning('You have already registered, please log in')
+    setTimeout(() => {
+      router.push('/login')
+    }, 3000)  }
 }
 </script>
 
