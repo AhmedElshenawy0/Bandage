@@ -9,11 +9,11 @@
           <h3 class="text-center">Register</h3>
           <div class="d-flex flex-column">
             <label>User name</label>
-            <input type="text" v-model="formData.username" required/>
+            <input type="text" v-model="formData.username" required />
           </div>
           <div class="d-flex flex-column">
             <label>Password</label>
-            <input type="password" v-model="formData.password" required/>
+            <input type="password" v-model="formData.password" required />
           </div>
           <button type="submit" class="btn">Register</button>
         </form>
@@ -25,7 +25,6 @@
 <script setup lang="ts">
 import { useCartStore } from '@/stores/Cart'
 import { useRouter } from 'vue-router'
-import { toast } from 'vue3-toastify'
 
 window.scrollTo(0, 0)
 
@@ -39,10 +38,9 @@ const formData = {
 const register = cartStore.register
 const handleSubmit = () => {
   formData.username !== '' && formData.password !== '' && register(formData)
-  toast.success("You has been registered successfuly, please log in")
   setTimeout(() => {
     router.push('/login')
-  }, 3000);
+  }, 3000)
 }
 </script>
 

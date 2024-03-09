@@ -44,10 +44,12 @@ const handleSubmit = () => {
   if (sessionStorage.getItem('id')) {
     login(formData)
     console.log(token.value)
-
     router.push('/')
   } else {
     toast.warning('You must register first')
+    setTimeout(() => {
+      router.push('/register')
+    }, 3000)
   }
 }
 </script>

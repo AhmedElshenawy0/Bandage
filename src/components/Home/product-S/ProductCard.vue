@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref } from 'vue'
+import { defineProps } from 'vue'
 import { type ProductType } from '@/Types/productsType'
 import { RouterLink } from 'vue-router'
 import AddButton from '@/components/global/buttons/AddButton.vue'

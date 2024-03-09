@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useCartStore } from '@/stores/Cart'
 import { storeToRefs } from 'pinia'
-import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import Swal from 'sweetalert2'
 const cartStore = useCartStore()
@@ -11,12 +10,11 @@ let userId = ref(id.value)
 const increase = cartStore.increase
 const decrease = cartStore.decrease
 const deleteFromCart = cartStore.deleteFromCart
-const router = useRouter()
 
 const handleDeleteAccount = () => {
   Swal.fire({
     title: 'Are you sure?',
-    text: "You want to delete your account!",
+    text: 'You want to delete your account!',
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -33,7 +31,7 @@ const handleDeleteAccount = () => {
         text: 'Your account has been deleted.',
         icon: 'success'
       })
-    } 
+    }
   })
 }
 </script>
@@ -41,25 +39,31 @@ const handleDeleteAccount = () => {
 <template>
   <div>
     <div v-if="!userId">
-      <h5 class="mt-3">
-        You must register and log in first .
-        <span class="login" v-if="!userId && !token" @click="$router.push('/register')"
-          >Register</span
-        >
-      </h5>
+      <h5 class="mt-3">You must register and log in first .</h5>
+      <button
+        class="login btn b-0 mt-2"
+        v-if="!userId && !token"
+        @click="$router.push('/register')"
+      >
+        Register
+      </button>
     </div>
     <div v-if="!token && userId">
-      <h5 class="mt-3">
-        You must log in first to show your cart.
-        <span class="login" v-if="userId && !token" @click="$router.push('/login')">Login</span>
-        <br />
-        <button
-          @click="handleDeleteAccount"
-          class="py-2 px-3 fs-6 fw-semibold text-white bg-danger rounded mt-3 border-0"
-        >
-          Delete Account
-        </button>
-      </h5>
+      <h5 class="mt-3">You must log in first to show your cart.</h5>
+      <button
+        class="login btn mt-2"
+        v-if="userId && !token"
+        @click="$router.push('/login')"
+      >
+        Login
+      </button>
+      <br />
+      <button
+        @click="handleDeleteAccount"
+        class="py-2 px-3 fs-6 fw-semibold text-white bg-danger rounded mt-3 border-0"
+      >
+        Delete Account
+      </button>
     </div>
     <div class="d-flex flex-column" v-if="token">
       <div
@@ -166,10 +170,9 @@ const handleDeleteAccount = () => {
   color: white;
 }
 
-.btn:hover {
-  background-color: rgb(14, 78, 180);
-  animation-name: btn;
-  animation-duration: 1s;
+.login:hover {
+  background-color: rgb(59 113 202);
+
 }
 .trash {
   background-color: rgb(235, 52, 83);
@@ -179,10 +182,18 @@ const handleDeleteAccount = () => {
   background-color: rgb(235, 52, 83);
   box-shadow: 0 2px 3px rgb(226, 130, 130);
 }
-.login {
-  font-size: 15px;
-  color: $main-color;
-  cursor: pointer;
+.login,
+.register {
+  font-size: 14px;
+  animation: login 1s linear;
+  box-shadow: 2px 2px 7px 1px $main-color;
+  background-color: $main-color;
+  color: white;
+  font-weight: 500;
+}
+.login:hover,
+.register:hover {
+  background-color: #1e90d3;
 }
 
 @media (max-width: 767px) {
