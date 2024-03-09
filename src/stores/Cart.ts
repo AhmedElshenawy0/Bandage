@@ -18,31 +18,26 @@ export const useCartStore = defineStore('cart', {
   }),
   getters: {},
   actions: {
-    async setProductToCart(product: ProductType, count: number ,id:number) {
-      if (sessionStorage.getItem('token')) {
-        product.rating.count = count
+    async setProductToCart(product: ProductType, count: number, id: number) {
+      product.rating.count = count
 
-        await axios
-          .post('https://fakestoreapi.com/carts', {
-            userId: id,
-            date: Date.now(),
-            products: product
-          })
-          .then((res) => {
-            const index = this.cartList?.findIndex((ele) => ele.id === res.data.products.id)
-            index === -1
-              ? this.cartList?.push(res.data.products)
-              : this.cartList[index].rating.count++
-            sessionStorage.setItem('cartList', JSON.stringify(this.cartList))
-            this.cartList = JSON.parse(sessionStorage.getItem('cartList') || '')
-            console.log(this.cartList)
-          })
+      await axios
+        .post('https://fakestoreapi.com/carts', {
+          userId: id,
+          date: Date.now(),
+          products: product
+        })
+        .then((res) => {
+          const index = this.cartList?.findIndex((ele) => ele.id === res.data.products.id)
+          index === -1
+            ? this.cartList?.push(res.data.products)
+            : this.cartList[index].rating.count++
+          sessionStorage.setItem('cartList', JSON.stringify(this.cartList))
+          this.cartList = JSON.parse(sessionStorage.getItem('cartList') || '')
+          console.log(this.cartList)
+        })
 
-        toast.success('The item has been added successfully')
-      } else {
-        toast.warning('You have to login first')
-        router.push("/login")
-      }
+      toast.success('The item has been added successfully')
     },
     increase(product: ProductType) {
       if (sessionStorage.getItem('token')) {
@@ -81,12 +76,12 @@ export const useCartStore = defineStore('cart', {
     },
 
     async register(formData: FormType) {
-        await axios
-          .post('https://fakestoreapi.com/users', formData)
-          .then((res) => (this.id = res.data.id))
-        sessionStorage.setItem('id', JSON.stringify(this.id))
-        this.id = JSON.parse(sessionStorage.getItem('id') || '')
-        toast.success('You have been successfully registered, please log in')
+      await axios
+        .post('https://fakestoreapi.com/users', formData)
+        .then((res) => (this.id = res.data.id))
+      sessionStorage.setItem('id', JSON.stringify(this.id))
+      this.id = JSON.parse(sessionStorage.getItem('id') || '')
+      toast.success('You have been successfully registered, please log in')
       // }
     },
     async login(formData: FormType) {
